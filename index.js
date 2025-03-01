@@ -1,6 +1,13 @@
-require("dotenv").config();
+
 const express = require("express");
 const jest = require("jest");
+if(process.env.NODE_ENV==="test")
+  {
+    require("dotenv").config({path:"env.testing"})
+  }else{
+    require("dotenv").config()
+  }
+
 const connectToDb = require("./config/mongo.config");
 const adminRouter = require("./routes/admin.route");
 const doctorRouter = require("./routes/doctor.routes");
@@ -10,6 +17,9 @@ const morganLogger = require("./middlewares/logger");
 const accesslogStream = fs.createWriteStream(logfilepath, { flags: "a" });
 app.use(morgan("combined", { stream: accesslogStream }));
 app.use(morganLogger);
+
+
+
 const PORT = Number(process.env.PORT);
 app.use(express.json());
 
