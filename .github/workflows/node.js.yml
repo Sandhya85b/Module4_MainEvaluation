@@ -32,5 +32,5 @@ jobs:
           env:
          NODE_ENV:test
          MONGO_URL:$({secret.MONGO_URL})
-         SECRET_KEY:$({SECRETS.SECRET_KEY})
+         JWT_SECRET:$({SECRETS.JWT_SECRET})
     
